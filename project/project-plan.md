@@ -70,4 +70,4 @@ This dataset contains data on gender-based discrimination in social institutions
 2. Preprocess the datasets by cleaning unwanted columns [#2][i2]
 3. Make the pipeline with the cleaned data [#3][i3]
 4. Try to find the correlation between the datasets and answer the main question [#4][i4]
-[i1]: https://github.com/lauraaadauti/made_ws2425/issues/1
+[i1]: https://github.com/issues
