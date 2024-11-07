@@ -66,8 +66,13 @@ This dataset contains data on gender-based discrimination in social institutions
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Search for suitable datasets [#1][i1]
-2. Preprocess the datasets by cleaning unwanted columns [#2][i2]
-3. Make the pipeline with the cleaned data [#3][i3]
-4. Try to find the correlation between the datasets and answer the main question [#4][i4]
-[i1]: https://github.com/issues
+1. Search for suitable datasets 
+2. Create Project plan and keep up to date
+3. Filter out datasets and select the most important ones 
+4. Preprocess the selected datasets by cleaning unwanted columns and unwanted data
+5. Build an automated pipeline with the cleaned data (Project Work 3 - Data Pipeline)
+6. Write the data report (Project Work 4 - Data Report)
+7. Test the pipeline (Project Work 5 - Automated Testing)
+8. Try to find the correlation between the datasets and answer the main question
+9. Make and write the final report (Project Work 7 - Final Report)
+10. Prepare a presentation (Project Work 8 - Presentation)
