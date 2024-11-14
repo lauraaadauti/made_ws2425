@@ -44,7 +44,6 @@ pipeline ParliamentPipeline {
             "Country Name" oftype country,
             "Year" oftype year,
             "Value" oftype percent
-
         ];
     }
 
@@ -78,63 +77,60 @@ pipeline ParliamentPipeline {
     }
 }
 
-pipeline YearsSchoolPipeline {
+pipeline ExpectedYearsSchoolPipeline {
 
-    YearsSchoolExtractor
-        -> YearsSchoolArchiveInterpreter
-        -> YearsSchoolFilePicker
-        -> YearsSchoolTextFileInterpreter
-        -> YearsSchoolCSVInterpreter
-        -> YearsSchoolColumnDeleter
-        -> YearsSchoolCellRangeSelector
-        -> YearsSchoolTableInterpreter
-        -> YearsSchoolLoader;
+    ExpectedYearsSchoolExtractor
+        -> ExpectedYearsSchoolArchiveInterpreter
+        -> ExpectedYearsSchoolFilePicker
+        -> ExpectedYearsSchoolTextFileInterpreter
+        -> ExpectedYearsSchoolCSVInterpreter
+        -> ExpectedYearsSchoolColumnDeleter
+        -> ExpectedYearsSchoolCellRangeSelector
+        -> ExpectedYearsSchoolTableInterpreter
+        -> ExpectedYearsSchoolLoader;
 
 
-    block YearsSchoolExtractor oftype LocalFileExtractor {
+    block ExpectedYearsSchoolExtractor oftype LocalFileExtractor {
         filePath: "./learning-adjusted-years-of-school.zip";
         
     }
 
-    block YearsSchoolArchiveInterpreter oftype ArchiveInterpreter {
+    block ExpectedYearsSchoolArchiveInterpreter oftype ArchiveInterpreter {
         archiveType: "zip";
     }
 
-    block YearsSchoolFilePicker oftype FilePicker {
+    block ExpectedYearsSchoolFilePicker oftype FilePicker {
         path: "./Learning-Adjusted Years of School.csv";
     }
 
-    block YearsSchoolTextFileInterpreter oftype TextFileInterpreter {
+    block ExpectedYearsSchoolTextFileInterpreter oftype TextFileInterpreter {
 
     }
 
-
-
-    block YearsSchoolCSVInterpreter oftype CSVInterpreter {
+    block ExpectedYearsSchoolCSVInterpreter oftype CSVInterpreter {
         delimiter: ",";
     }
 
-    block YearsSchoolColumnDeleter oftype ColumnDeleter {
+    block ExpectedYearsSchoolColumnDeleter oftype ColumnDeleter {
         delete: [column D];
     }
 
-    block YearsSchoolCellRangeSelector oftype CellRangeSelector {
+    block ExpectedYearsSchoolCellRangeSelector oftype CellRangeSelector {
         select: range C2:F*;
     }
 
-    block YearsSchoolTableInterpreter oftype TableInterpreter {
+    block ExpectedYearsSchoolTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
             "Country Name" oftype countryFormat,
             "Year" oftype yearFormat,
             "Value" oftype valueFormat
-
         ];
     }
 
-    block YearsSchoolLoader oftype SQLiteLoader {
-        table: "YearsSchoolWomen";
-        file: "../data/yearsSchoolWomen.sqlite";
+    block ExpectedYearsSchoolLoader oftype SQLiteLoader {
+        table: "ExpectedYearsSchoolWomen";
+        file: "../data/expectedYearsSchoolWomen.sqlite";
     }
 
     constraint CountryFormatConstraint oftype RegexConstraint {
@@ -161,6 +157,7 @@ pipeline YearsSchoolPipeline {
         constraints: [ValueFormatConstraint];
     }
 }
+
 pipeline SecondarySchoolPipeline {
 
     SecondarySchoolExtractor
@@ -191,8 +188,6 @@ pipeline SecondarySchoolPipeline {
 
     }
 
-
-
     block SecondarySchoolCSVInterpreter oftype CSVInterpreter {
         delimiter: ",";
     }
@@ -211,7 +206,6 @@ pipeline SecondarySchoolPipeline {
             "Country Name" oftype countrySecondary,
             "Year" oftype yearSecondary,
             "Value" oftype valueSecondary
-
         ];
     }
 
@@ -275,8 +269,6 @@ pipeline TertiarySchoolPipeline {
 
     }
 
-
-
     block TertiarySchoolCSVInterpreter oftype CSVInterpreter {
         delimiter: ",";
     }
@@ -295,7 +287,6 @@ pipeline TertiarySchoolPipeline {
             "Country Name" oftype countryTertiary,
             "Year" oftype yearTertiary,
             "Value" oftype valueTertiary
-
         ];
     }
 

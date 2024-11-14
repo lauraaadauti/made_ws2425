@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#navigate to pipeline.sh directionary and open Git Bash there
+#navigate to project/ directionary and open Git Bash there
 
 url1="https://extdataportal.worldbank.org/content/dam/sites/data/gender-data/data/data-gen/zip/indicator/proportion-of-seats-held-by-women-in-national-parliaments.zip"
 
