@@ -3,6 +3,7 @@
 # navigate to /project directionary and open Git Bash there
 # execute "bash pipeline.sh" in Git Bash in /project directionary
 # Jayvee version 0.6.4
+# Installation of cURL required
 
 url1="https://extdataportal.worldbank.org/content/dam/sites/data/gender-data/data/data-gen/zip/indicator/learning-adjusted-years-of-school.zip"
 
