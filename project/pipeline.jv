@@ -1,0 +1,333 @@
+pipeline ParliamentPipeline {
+    ParliamentExtractor
+        -> ParliamentArchiveInterpreter
+        -> ParliamentFilePicker
+        -> ParliamentTextFileInterpreter
+        -> ParliamentCSVInterpreter
+        -> ParliamentColumnDeleter
+        -> ParliamentCellRangeSelector
+        -> ParliamentTableInterpreter
+        -> ParliamentLoader;
+
+
+    block ParliamentExtractor oftype LocalFileExtractor {
+        filePath: "./proportion-of-seats-held-by-women-in-national-parliaments.zip";
+    }
+
+    block ParliamentArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block ParliamentFilePicker oftype FilePicker {
+        path: "./Proportion of seats held by women in national parliaments (%).csv";
+    }
+
+    block ParliamentTextFileInterpreter oftype TextFileInterpreter {
+
+    }
+
+    block ParliamentCSVInterpreter oftype CSVInterpreter {
+        delimiter: ",";
+    }
+
+    block ParliamentColumnDeleter oftype ColumnDeleter {
+        delete: [column D];
+    }
+
+    block ParliamentCellRangeSelector oftype CellRangeSelector {
+        select: range C2:F*;
+    }
+
+    block ParliamentTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Country Name" oftype country,
+            "Year" oftype year,
+            "Value" oftype percent
+
+        ];
+    }
+
+    block ParliamentLoader oftype SQLiteLoader {
+        table: "parliamentWomen";
+        file: "../data/parliamentWomen.sqlite";
+    }
+
+    constraint CountryConstraint oftype RegexConstraint {
+        regex: /^("Canada"|"United States"|"Honduras"|"Guatemala")$/;
+    }
+
+    valuetype country oftype text {
+       constraints: [CountryConstraint];
+    }
+
+    constraint YearConstraint oftype RegexConstraint {
+        regex: /^("2023"|"2017"|"2019"|"2020")$/;
+    }
+
+    valuetype year oftype text {
+        constraints: [YearConstraint];
+    }
+
+    constraint PercentConstraint oftype RegexConstraint {
+        regex: /^("\d{1,3}.\d{1,3}")$/;
+    }
+
+    valuetype percent oftype text {
+        constraints: [PercentConstraint];
+    }
+}
+
+pipeline YearsSchoolPipeline {
+
+    YearsSchoolExtractor
+        -> YearsSchoolArchiveInterpreter
+        -> YearsSchoolFilePicker
+        -> YearsSchoolTextFileInterpreter
+        -> YearsSchoolCSVInterpreter
+        -> YearsSchoolColumnDeleter
+        -> YearsSchoolCellRangeSelector
+        -> YearsSchoolTableInterpreter
+        -> YearsSchoolLoader;
+
+
+    block YearsSchoolExtractor oftype LocalFileExtractor {
+        filePath: "./learning-adjusted-years-of-school.zip";
+        
+    }
+
+    block YearsSchoolArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block YearsSchoolFilePicker oftype FilePicker {
+        path: "./Learning-Adjusted Years of School.csv";
+    }
+
+    block YearsSchoolTextFileInterpreter oftype TextFileInterpreter {
+
+    }
+
+
+
+    block YearsSchoolCSVInterpreter oftype CSVInterpreter {
+        delimiter: ",";
+    }
+
+    block YearsSchoolColumnDeleter oftype ColumnDeleter {
+        delete: [column D];
+    }
+
+    block YearsSchoolCellRangeSelector oftype CellRangeSelector {
+        select: range C2:F*;
+    }
+
+    block YearsSchoolTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Country Name" oftype countryFormat,
+            "Year" oftype yearFormat,
+            "Value" oftype valueFormat
+
+        ];
+    }
+
+    block YearsSchoolLoader oftype SQLiteLoader {
+        table: "YearsSchoolWomen";
+        file: "../data/yearsSchoolWomen.sqlite";
+    }
+
+    constraint CountryFormatConstraint oftype RegexConstraint {
+        regex: /^("Canada"|"United States"|"Honduras"|"Guatemala")$/;
+    }
+
+    valuetype countryFormat oftype text {
+       constraints: [CountryFormatConstraint];
+    }
+
+    constraint YearFormatConstraint oftype RegexConstraint {
+        regex: /^("2020"|"2017")$/;
+    }
+
+    valuetype yearFormat oftype text {
+        constraints: [YearFormatConstraint];
+    }
+
+    constraint ValueFormatConstraint oftype RegexConstraint {
+        regex: /^("\d{1,3}.\d{1,3}")$/;
+    }
+
+    valuetype valueFormat oftype text {
+        constraints: [ValueFormatConstraint];
+    }
+}
+pipeline SecondarySchoolPipeline {
+
+    SecondarySchoolExtractor
+        -> SecondarySchoolArchiveInterpreter
+        -> SecondarySchoolFilePicker
+        -> SecondarySchoolTextFileInterpreter
+        -> SecondarySchoolCSVInterpreter
+        -> SecondarySchoolColumnDeleter
+        -> SecondarySchoolCellRangeSelector
+        -> SecondarySchoolTableInterpreter
+        -> SecondarySchoolLoader;
+
+
+    block SecondarySchoolExtractor oftype LocalFileExtractor {
+        filePath: "./school-enrollment-secondary.zip";
+        
+    }
+
+    block SecondarySchoolArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block SecondarySchoolFilePicker oftype FilePicker {
+        path: "./School enrollment, secondary (%).csv";
+    }
+
+    block SecondarySchoolTextFileInterpreter oftype TextFileInterpreter {
+
+    }
+
+
+
+    block SecondarySchoolCSVInterpreter oftype CSVInterpreter {
+        delimiter: ",";
+    }
+
+    block SecondarySchoolColumnDeleter oftype ColumnDeleter {
+        delete: [column D, column F];
+    }
+
+    block SecondarySchoolCellRangeSelector oftype CellRangeSelector {
+        select: range D2:G3934;
+    }
+
+    block SecondarySchoolTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Country Name" oftype countrySecondary,
+            "Year" oftype yearSecondary,
+            "Value" oftype valueSecondary
+
+        ];
+    }
+
+    block SecondarySchoolLoader oftype SQLiteLoader {
+        table: "SecondarySchoolWomen";
+        file: "../data/secondarySchoolWomen.sqlite";
+    }
+
+    constraint CountrySecondaryConstraint oftype RegexConstraint {
+        regex: /^("Canada"|"United States"|"Honduras"|"Guatemala")$/;
+    }
+
+    valuetype countrySecondary oftype text {
+       constraints: [CountrySecondaryConstraint];
+    }
+
+    constraint YearSecondaryConstraint oftype RegexConstraint {
+        regex: /^("2017")$/;
+    }
+
+    valuetype yearSecondary oftype text {
+        constraints: [YearSecondaryConstraint];
+    }
+
+    constraint ValueSecondaryConstraint oftype RegexConstraint {
+        regex: /^("\d{1,3}.\d{1,3}")$/;
+    }
+
+    valuetype valueSecondary oftype text {
+        constraints: [ValueSecondaryConstraint];
+    }
+}
+
+pipeline TertiarySchoolPipeline {
+
+    TertiarySchoolExtractor
+        -> TertiarySchoolArchiveInterpreter
+        -> TertiarySchoolFilePicker
+        -> TertiarySchoolTextFileInterpreter
+        -> TertiarySchoolCSVInterpreter
+        -> TertiarySchoolColumnDeleter
+        -> TertiarySchoolCellRangeSelector
+        -> TertiarySchoolTableInterpreter
+        -> TertiarySchoolLoader;
+
+
+    block TertiarySchoolExtractor oftype LocalFileExtractor {
+        filePath: "./school-enrollment-tertiary-gross.zip";
+        
+    }
+
+    block TertiarySchoolArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block TertiarySchoolFilePicker oftype FilePicker {
+        path: "./School enrollment, tertiary (% gross).csv";
+    }
+
+    block TertiarySchoolTextFileInterpreter oftype TextFileInterpreter {
+
+    }
+
+
+
+    block TertiarySchoolCSVInterpreter oftype CSVInterpreter {
+        delimiter: ",";
+    }
+
+    block TertiarySchoolColumnDeleter oftype ColumnDeleter {
+        delete: [column D, column F];
+    }
+
+    block TertiarySchoolCellRangeSelector oftype CellRangeSelector {
+        select: range D2:G7772;
+    }
+
+    block TertiarySchoolTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Country Name" oftype countryTertiary,
+            "Year" oftype yearTertiary,
+            "Value" oftype valueTertiary
+
+        ];
+    }
+
+    block TertiarySchoolLoader oftype SQLiteLoader {
+        table: "TertiarySchoolWomen";
+        file: "../data/tertiarySchoolWomen.sqlite";
+    }
+
+    constraint CountryTertiaryConstraint oftype RegexConstraint {
+        regex: /^("Canada"|"United States"|"Honduras"|"Guatemala")$/;
+    }
+
+    valuetype countryTertiary oftype text {
+       constraints: [CountryTertiaryConstraint];
+    }
+
+    constraint YearTertiaryConstraint oftype RegexConstraint {
+        regex: /^("2019")$/;
+    }
+
+    valuetype yearTertiary oftype text {
+        constraints: [YearTertiaryConstraint];
+    }
+
+    constraint ValueTertiaryConstraint oftype RegexConstraint {
+        regex: /^("\d{1,3}.\d{1,3}")$/;
+    }
+
+    valuetype valueTertiary oftype text {
+        constraints: [ValueTertiaryConstraint];
+    }
+}
+
+
+
