@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # navigate to /project directionary and open Git Bash there
-# bash pipeline.sh in Git Bash ausführen
+# execute "bash pipeline.sh" in Git Bash in /project directionary
 
 url1="https://extdataportal.worldbank.org/content/dam/sites/data/gender-data/data/data-gen/zip/indicator/learning-adjusted-years-of-school.zip"
 
