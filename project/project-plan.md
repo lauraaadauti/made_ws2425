@@ -2,12 +2,12 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Correlation analysis between the degree of Female School Education and Female Political Representation in America (Canada, United States, Guatemala, Honduras)
+Correlation analysis between Female School Education and Female Political Representation in America (Canada, United States, Guatemala, Honduras)
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Is there a connection between the degree of a woman's school education and female political representation across the Americas (Canada, United States, Guatemala, Honduras)?
+1. Is there a connection between a woman's school education and female political representation across the Americas (Canada, United States, Guatemala, Honduras)?
 
 ## Description
 
@@ -20,12 +20,12 @@ The results can give insights into the factors that promote or hinder women's po
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: Proportion of seats held by women in national parliaments (%)
-* Metadata URL: https://genderdata.worldbank.org/en/indicator/sg-gen-parl-zs
-* Data URL: https://extdataportal.worldbank.org/content/dam/sites/data/gender-data/data/data-gen/zip/indicator/proportion-of-seats-held-by-women-in-national-parliaments.zip
+### Datasource1: Share of women in parliament
+* Metadata URL: https://ourworldindata.org/grapher/share-of-women-in-parliament-ipu
+* Data URL: https://ourworldindata.org/grapher/share-of-women-in-parliament-ipu.csv?v=1&csvType=full&useColumnShortNames=trueproportion-of-seats-held-by-women-in-national-parliaments.zip
 * Data Type: CSV
 
-This data source shows the percentage of seats held by women in national parliaments.
+This data source shows the percentage of shares of women in parliaments.
 
 ### Datasource2: Learning-Adjusted Years of School
 * Metadata URL: https://genderdata.worldbank.org/en/indicator/hd-hci-lays

@@ -1,25 +1,14 @@
 pipeline ParliamentPipeline {
     ParliamentExtractor
-        -> ParliamentArchiveInterpreter
-        -> ParliamentFilePicker
         -> ParliamentTextFileInterpreter
         -> ParliamentCSVInterpreter
         -> ParliamentColumnDeleter
-        -> ParliamentCellRangeSelector
         -> ParliamentTableInterpreter
         -> ParliamentLoader;
 
 
-    block ParliamentExtractor oftype LocalFileExtractor {
-        filePath: "./proportion-of-seats-held-by-women-in-national-parliaments.zip";
-    }
-
-    block ParliamentArchiveInterpreter oftype ArchiveInterpreter {
-        archiveType: "zip";
-    }
-
-    block ParliamentFilePicker oftype FilePicker {
-        path: "./Proportion of seats held by women in national parliaments (%).csv";
+    block ParliamentExtractor oftype HttpExtractor {
+        url: "https://ourworldindata.org/grapher/share-of-women-in-parliament-ipu.csv?v=1&csvType=full&useColumnShortNames=true";
     }
 
     block ParliamentTextFileInterpreter oftype TextFileInterpreter {
@@ -31,19 +20,15 @@ pipeline ParliamentPipeline {
     }
 
     block ParliamentColumnDeleter oftype ColumnDeleter {
-        delete: [column D];
-    }
-
-    block ParliamentCellRangeSelector oftype CellRangeSelector {
-        select: range C2:F*;
+        delete: [column B];
     }
 
     block ParliamentTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
-            "Country Name" oftype country,
+            "Entity" oftype country,
             "Year" oftype year,
-            "Value" oftype percent
+            "sg_gen_parl_zs" oftype percent
         ];
     }
 
@@ -53,7 +38,7 @@ pipeline ParliamentPipeline {
     }
 
     constraint CountryConstraint oftype RegexConstraint {
-        regex: /^("Canada"|"United States"|"Honduras"|"Guatemala")$/;
+        regex: /^(Canada|United States|Honduras|Guatemala)$/;
     }
 
     valuetype country oftype text {
@@ -61,7 +46,7 @@ pipeline ParliamentPipeline {
     }
 
     constraint YearConstraint oftype RegexConstraint {
-        regex: /^("2023"|"2017"|"2019"|"2020")$/;
+        regex: /^(2023|2017|2019|2020)$/;
     }
 
     valuetype year oftype text {
@@ -69,7 +54,7 @@ pipeline ParliamentPipeline {
     }
 
     constraint PercentConstraint oftype RegexConstraint {
-        regex: /^("\d{1,3}.\d{1,3}")$/;
+        regex: /^(\d{1,3}.\d{1,6})$/;
     }
 
     valuetype percent oftype text {
