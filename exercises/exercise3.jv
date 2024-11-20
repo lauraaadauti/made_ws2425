@@ -40,7 +40,7 @@ pipeline GovernmentSustainablePipeline {
 
     block BondIssuanceLoader oftype SQLiteLoader {
         table: "bondIssuance";
-        file: "../data/country-stats.sqlite";
+        file: "./country-stats.sqlite";
     }
 
     constraint BondIssuanceShareFormatConstraint oftype RangeConstraint {
@@ -66,7 +66,7 @@ pipeline GovernmentSustainablePipeline {
 
     block GDPPerCapitaLoader oftype SQLiteLoader {
         table: "gdpPerCapita";
-        file: "../data/country-stats.sqlite";
+        file: "./country-stats.sqlite";
     }
     
     constraint GDPFormatConstraint oftype RangeConstraint {
