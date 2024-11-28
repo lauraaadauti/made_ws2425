@@ -7,13 +7,13 @@ Correlation analysis between Female School Education and Female Political Repres
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Is there a connection between a woman's school education and female political representation across the Americas (Canada, United States, Guatemala, Honduras)?
+1. Is there a correlation between a woman's school education and female political representation across the Americas (Canada, United States, Guatemala, Honduras)?
 
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
 Gender Inequality in political representation is an important problem, because it hinders progress toward a more inclusive and representative governance.
-This projects analyzes the connection between female school education and female political representation across the Americas (Canada, United States, Guatemala, Honduras), using statistical correlation. 
+This project analyzes if there is a correlation between female school education and female political representation across the Americas (Canada, United States, Guatemala, Honduras), using statistical correlation. 
 The results can give insights into the factors that promote or hinder women's political participation.
 
 ## Datasources

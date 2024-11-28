@@ -1,14 +1,15 @@
 pipeline ParliamentPipeline {
-    ParliamentExtractor
+    ParliamentHttpExtractor
         -> ParliamentTextFileInterpreter
         -> ParliamentCSVInterpreter
         -> ParliamentColumnDeleter
         -> ParliamentTableInterpreter
-        -> ParliamentLoader;
+        -> ParliamentSQLiteLoader;
 
 
-    block ParliamentExtractor oftype HttpExtractor {
+    block ParliamentHttpExtractor oftype HttpExtractor {
         url: "https://ourworldindata.org/grapher/share-of-women-in-parliament-ipu.csv?v=1&csvType=full&useColumnShortNames=true";
+        retries: 3;
     }
 
     block ParliamentTextFileInterpreter oftype TextFileInterpreter {
@@ -32,9 +33,9 @@ pipeline ParliamentPipeline {
         ];
     }
 
-    block ParliamentLoader oftype SQLiteLoader {
+    block ParliamentSQLiteLoader oftype SQLiteLoader {
         table: "parliamentWomen";
-        file: "../data/parliamentWomen.sqlite";
+        file: "../data/project.sqlite";
     }
 
     constraint CountryConstraint oftype RegexConstraint {
@@ -46,7 +47,7 @@ pipeline ParliamentPipeline {
     }
 
     constraint YearConstraint oftype RegexConstraint {
-        regex: /^(2023|2017|2019|2020)$/;
+        regex: /^(2007|2008|2009|2010|2011|2012|2013|2014|2015|2016|2017|2018|2019|2020|2021|2022)$/;
     }
 
     valuetype year oftype text {
@@ -77,7 +78,6 @@ pipeline ExpectedYearsSchoolPipeline {
 
     block ExpectedYearsSchoolExtractor oftype LocalFileExtractor {
         filePath: "./learning-adjusted-years-of-school.zip";
-        
     }
 
     block ExpectedYearsSchoolArchiveInterpreter oftype ArchiveInterpreter {
@@ -97,11 +97,11 @@ pipeline ExpectedYearsSchoolPipeline {
     }
 
     block ExpectedYearsSchoolColumnDeleter oftype ColumnDeleter {
-        delete: [column D];
+        delete: [column A, column B, column C, column E];
     }
 
     block ExpectedYearsSchoolCellRangeSelector oftype CellRangeSelector {
-        select: range C2:F*;
+        select: range A2:D511;
     }
 
     block ExpectedYearsSchoolTableInterpreter oftype TableInterpreter {
@@ -115,7 +115,7 @@ pipeline ExpectedYearsSchoolPipeline {
 
     block ExpectedYearsSchoolLoader oftype SQLiteLoader {
         table: "ExpectedYearsSchoolWomen";
-        file: "../data/expectedYearsSchoolWomen.sqlite";
+        file: "../data/project.sqlite";
     }
 
     constraint CountryFormatConstraint oftype RegexConstraint {
@@ -127,7 +127,7 @@ pipeline ExpectedYearsSchoolPipeline {
     }
 
     constraint YearFormatConstraint oftype RegexConstraint {
-        regex: /^("2020"|"2017")$/;
+        regex: /^("2020"|"2017"|"2010"|"2018")$/;
     }
 
     valuetype yearFormat oftype text {
@@ -196,7 +196,7 @@ pipeline SecondarySchoolPipeline {
 
     block SecondarySchoolLoader oftype SQLiteLoader {
         table: "SecondarySchoolWomen";
-        file: "../data/secondarySchoolWomen.sqlite";
+        file: "../data/project.sqlite";
     }
 
     constraint CountrySecondaryConstraint oftype RegexConstraint {
@@ -208,7 +208,7 @@ pipeline SecondarySchoolPipeline {
     }
 
     constraint YearSecondaryConstraint oftype RegexConstraint {
-        regex: /^("2017")$/;
+        regex: /^("2017"|"2010"|"2011"|"2012"|"2013"|"2014"|"2015"|"2016"|"2018")$/;
     }
 
     valuetype yearSecondary oftype text {
@@ -277,7 +277,7 @@ pipeline TertiarySchoolPipeline {
 
     block TertiarySchoolLoader oftype SQLiteLoader {
         table: "TertiarySchoolWomen";
-        file: "../data/tertiarySchoolWomen.sqlite";
+        file: "../data/project.sqlite";
     }
 
     constraint CountryTertiaryConstraint oftype RegexConstraint {
@@ -289,7 +289,7 @@ pipeline TertiarySchoolPipeline {
     }
 
     constraint YearTertiaryConstraint oftype RegexConstraint {
-        regex: /^("2019")$/;
+        regex: /^("2007"|"2008"|"2009"|"2010"|"2011"|"2012"|"2013"|"2014"|"2015"|"2016"|"2017"|"2018"|"2019"|"2020"|"2021"|"2022")$/;
     }
 
     valuetype yearTertiary oftype text {
