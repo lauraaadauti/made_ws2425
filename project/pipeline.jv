@@ -2,6 +2,8 @@ pipeline ParliamentPipeline {
     ParliamentHttpExtractor
         -> ParliamentTextFileInterpreter
         -> ParliamentCSVInterpreter
+        -> ParliamentHeaderWriter
+        -> ParliamentHeaderWriter2
         -> ParliamentColumnDeleter
         -> ParliamentTableInterpreter
         -> ParliamentSQLiteLoader;
@@ -20,6 +22,16 @@ pipeline ParliamentPipeline {
         delimiter: ",";
     }
 
+    block ParliamentHeaderWriter oftype CellWriter {
+        at: cell A1;
+        write: ["Country Name"];
+    }
+
+    block ParliamentHeaderWriter2 oftype CellWriter {
+        at: cell D1;
+        write: ["Value"];
+    }
+
     block ParliamentColumnDeleter oftype ColumnDeleter {
         delete: [column B];
     }
@@ -27,9 +39,9 @@ pipeline ParliamentPipeline {
     block ParliamentTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
-            "Entity" oftype country,
+            "Country Name" oftype country,
             "Year" oftype year,
-            "sg_gen_parl_zs" oftype percent
+            "Value" oftype percent
         ];
     }
 
