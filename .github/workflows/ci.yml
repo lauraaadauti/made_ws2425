@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - project/**
 
 jobs:
   exercise-feedback:
@@ -22,9 +20,9 @@ jobs:
           node-version: "lts/*"
 
       # Install jayvee
-      - name: Set up Jayvee
-        run: |
-          ./grading/ci/setup_jayvee.sh
+      # - name: Set up Jayvee
+      #   run: |
+      #     ./grading/ci/setup_jayvee.sh
 
       # Install python
       - name: Set up Python 3.11
