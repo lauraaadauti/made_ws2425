@@ -1,6 +1,5 @@
 import os
 import sqlite3
-import subprocess
 import unittest
 import pandas as pd
 
