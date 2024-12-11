@@ -17,7 +17,6 @@ class TestPipeline(unittest.TestCase):
         self.assertTrue(os.path.exists(SQLITE_FILE), "The SQLite file was not created.")
         print("SQLite file exists.")
         
-        
     def test_sqlite_tables(self):
         # test if the expected tables exist in the SQLite database.
         print("Testing SQLite database tables...")
@@ -63,7 +62,7 @@ class TestPipeline(unittest.TestCase):
      
     def test_sqlite_table_minimum_rows(self):        
         # test for a minimal number of rows, minimum 1 row for each country should be present, so 4 rows minimum for each table
-        print("Testing if SQLite database tables have a minimum number of rows...")
+        print("Testing if SQLite database tables have a minimum number of 4 rows...")
         with sqlite3.connect(SQLITE_FILE) as conn:
             tables = {
                 "parliamentWomen": "Table 'parliamentWomen' has less than 4 rows.",
