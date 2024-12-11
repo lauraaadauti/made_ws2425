@@ -40,6 +40,6 @@ jobs:
         run: |
           cd ..
           cd ..
-          cd project
+          cd ./project
           chmod +x tests.sh
           ./tests.sh
