@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  exercise-feedback:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,17 +20,23 @@ jobs:
           node-version: "lts/*"
 
       # Install jayvee
-      # - name: Set up Jayvee
-      #   run: |
-      #     ./grading/ci/setup_jayvee.sh
+      - name: Set up Jayvee
+        run: |
+          npm install -g @jvalue/jayvee-interpreter
 
       # Install python
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
+      
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install pandas
 
       # Run tests
       - name: Run tests
         run: |
+          chmod +x project/tests.sh
           ./project/tests.sh
