@@ -131,7 +131,7 @@ pipeline ExpectedYearsSchoolPipeline {
     }
 
     constraint CountryFormatConstraint oftype RegexConstraint {
-        regex: /^("Canada"|"United States"|"Honduras"|"Guatemala")$/;
+        regex: /^("United States"|"Canada"|"Honduras"|"Guatemala")$/;
     }
 
     valuetype countryFormat oftype text {
