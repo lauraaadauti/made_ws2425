@@ -35,14 +35,7 @@ This data source shows the percentage of shares of women in parliaments.
 This data source shows the Learning-adjusted years of school. It shows the expected years, that a pupil will stay in school, by gender and countries.
 Learning-adjusted years of school are calculated by multiplying the estimates of expected years of school by the ratio of most recent harmonized test scores to 625.
 
-### Datasource3: School enrollment, secondary (%)
-* Metadata URL: https://genderdata.worldbank.org/en/indicator/se-sec-enrr
-* Data URL: https://extdataportal.worldbank.org/content/dam/sites/data/gender-data/data/data-gen/zip/indicator/school-enrollment-secondary.zip
-* Data Type: CSV
-
-This data source shows the percentage of secondary school enrollment, by gender and countries.
-
-### Datasource4: School enrollment, tertiary (% gross)
+### Datasource3: School enrollment, tertiary (% gross)
 * Metadata URL: https://genderdata.worldbank.org/en/indicator/se-ter-enrr
 * Data URL: https://extdataportal.worldbank.org/content/dam/sites/data/gender-data/data/data-gen/zip/indicator/school-enrollment-tertiary-gross.zip
 * Data Type: CSV

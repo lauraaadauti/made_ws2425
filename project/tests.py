@@ -26,7 +26,6 @@ class TestPipeline(unittest.TestCase):
             tables = [row[0] for row in cursor.fetchall()]
             self.assertIn("parliamentWomen", tables, "Table 'parliamentWomen' not found in SQLite database.")
             self.assertIn("ExpectedYearsSchoolWomen", tables, "Table 'ExpectedYearsSchoolWomen' not found in SQLite database.")
-            self.assertIn("SecondarySchoolWomen", tables, "Table 'SecondarySchoolWomen' not found in SQLite database.")
             self.assertIn("TertiarySchoolWomen", tables, "Table 'TertiarySchoolWomen' not found in SQLite database.")
             print("Expected tables found in SQLite database.")    
     
@@ -37,7 +36,6 @@ class TestPipeline(unittest.TestCase):
             tables = {
                 "parliamentWomen": "Table 'parliamentWomen' is empty.",
                 "ExpectedYearsSchoolWomen": "Table 'ExpectedYearsSchoolWomen' is empty.",
-                "SecondarySchoolWomen": "Table 'SecondarySchoolWomen' is empty.",
                 "TertiarySchoolWomen": "Table 'TertiarySchoolWomen' is empty.",
             }
             for table, error_message in tables.items():
@@ -51,7 +49,6 @@ class TestPipeline(unittest.TestCase):
         expected_columns = {
             "parliamentWomen": ['Country Name', 'Year', 'Value'],
             "ExpectedYearsSchoolWomen": ['Country Name', 'Year', 'Value'],
-            "SecondarySchoolWomen": ['Country Name', 'Year', 'Value'],
             "TertiarySchoolWomen": ['Country Name', 'Year', 'Value'],
         }
         with sqlite3.connect(SQLITE_FILE) as conn:
@@ -67,7 +64,6 @@ class TestPipeline(unittest.TestCase):
             tables = {
                 "parliamentWomen": "Table 'parliamentWomen' has less than 4 rows.",
                 "ExpectedYearsSchoolWomen": "Table 'ExpectedYearsSchoolWomen' has less than 4 rows.",
-                "SecondarySchoolWomen": "Table 'SecondarySchoolWomen' has less than 4 rows.",
                 "TertiarySchoolWomen": "Table 'TertiarySchoolWomen' has less than 4 rows.",
             }
             for table, error_message in tables.items():
